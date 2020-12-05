@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import TickRateSlider from '../tickRateSlider/TickRateSlider';
 import StartStopButton from '../startStopButton/StartStopButton';
 import RandomiseButton from '../randomiseButton/RandomiseButton';
+import SpawnChanceSlider from '../spawnChanceSlider/SpawnChanceSlider';
 
 interface HeaderProps {
   title: string;
@@ -16,6 +17,9 @@ interface HeaderProps {
   startStopClickHandler: any;
   // TODO: Fix type
   randomiseClickHandler: any;
+  currentSpawnChance: number;
+  // TODO: Fix type
+  spawnChanceChangeHandler: any;
 }
 
 const Header: React.FC<HeaderProps> = ({
@@ -27,15 +31,20 @@ const Header: React.FC<HeaderProps> = ({
   running,
   startStopClickHandler,
   randomiseClickHandler,
+  currentSpawnChance,
+  spawnChanceChangeHandler,
 }) => {
   const tickSlider = (
-    <TickRateSlider
-      running={running}
-      minTickRate={minTickRate}
-      maxTickRate={maxTickRate}
-      currentTickRate={currentTickRate}
-      onChangeHandler={tickChangeHandler}
-    />
+    <>
+      <label>Tick Rate</label>
+      <TickRateSlider
+        running={running}
+        minTickRate={minTickRate}
+        maxTickRate={maxTickRate}
+        currentTickRate={currentTickRate}
+        onChangeHandler={tickChangeHandler}
+      />
+    </>
   );
 
   const startStopButton = (
@@ -49,14 +58,24 @@ const Header: React.FC<HeaderProps> = ({
     />
   );
 
+  const spawnRateSlider = (
+    <>
+      <label>Spawn Rate</label>
+      <SpawnChanceSlider
+        currentSpawnChance={currentSpawnChance}
+        onChangeHandler={spawnChanceChangeHandler}
+      />
+    </>
+  );
+
   return (
     <header>
       <h1>{title}</h1>
       <div>
-        <label>Tick Rate</label>
         {tickSlider}
         {startStopButton}
         {randomiseButton}
+        {spawnRateSlider}
       </div>
     </header>
   );
