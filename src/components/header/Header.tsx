@@ -30,6 +30,7 @@ const Header: React.FC<HeaderProps> = ({
 }) => {
   const tickSlider = (
     <TickRateSlider
+      running={running}
       minTickRate={minTickRate}
       maxTickRate={maxTickRate}
       currentTickRate={currentTickRate}
@@ -42,7 +43,10 @@ const Header: React.FC<HeaderProps> = ({
   );
 
   const randomiseButton = (
-    <RandomiseButton randomiseHandler={randomiseClickHandler} />
+    <RandomiseButton
+      randomiseHandler={randomiseClickHandler}
+      running={running}
+    />
   );
 
   return (
