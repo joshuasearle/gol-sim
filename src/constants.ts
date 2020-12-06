@@ -1,4 +1,4 @@
-export const title = 'GOL Simulator';
+export const title = 'Game of Life Simulator';
 
 export const minTickRate = 10;
 export const maxTickRate = 50;
