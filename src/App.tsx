@@ -10,9 +10,26 @@ import {
   maxTickRate,
   initialTickRate,
   initialSpawnChance,
+  boardWidth,
+  boardHeight,
 } from './constants';
 
+const createEmpty2dArray = (width: number, height: number) => {
+  let arr = [];
+  for (let i = 0; i < height; i++) {
+    let subArr = [];
+    for (let j = 0; j < width; j++) {
+      subArr.push(false);
+    }
+    arr.push(subArr);
+  }
+  return arr;
+};
+
 const App: React.FC = () => {
+  const [board, setBoard] = useState(
+    createEmpty2dArray(boardWidth, boardHeight)
+  );
   const [currentTickRate, setCurrentTickRate] = useState(initialTickRate);
   // Initially, the simulation is not running
   const [running, setRunning] = useState(false);
@@ -56,7 +73,7 @@ const App: React.FC = () => {
         currentSpawnChance={currentSpawnChance}
         spawnChanceChangeHandler={spawnChanceChangeHandler}
       />
-      <Body />
+      <Body board={board} />
       <Footer />
     </>
   );
