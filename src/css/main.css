@@ -30,3 +30,14 @@ html {
 .header-options div {
   padding: 0.3em 1em;
 }
+
+.cell {
+  border: 1px solid black;
+  display: inline-block;
+  margin: 0;
+  padding: 0;
+}
+
+.board {
+  border: none;
+}
