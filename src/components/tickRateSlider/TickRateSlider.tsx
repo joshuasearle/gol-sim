@@ -6,7 +6,6 @@ interface TickRateSliderProps {
   currentTickRate: number;
   // TODO: Fix type
   onChangeHandler: any;
-  running: boolean;
 }
 
 const TickRateSlider: React.FC<TickRateSliderProps> = ({
@@ -14,7 +13,6 @@ const TickRateSlider: React.FC<TickRateSliderProps> = ({
   maxTickRate,
   currentTickRate,
   onChangeHandler,
-  running,
 }: TickRateSliderProps) => {
   return (
     <input
@@ -23,8 +21,6 @@ const TickRateSlider: React.FC<TickRateSliderProps> = ({
       max={maxTickRate}
       value={currentTickRate}
       onChange={onChangeHandler}
-      // If simulation is running, cannot change the tick rate
-      disabled={running}
     />
   );
 };
