@@ -40,7 +40,6 @@ const Header: React.FC<HeaderProps> = ({
     <div>
       <label>Tick Rate</label>
       <TickRateSlider
-        running={running}
         minTickRate={minTickRate}
         maxTickRate={maxTickRate}
         currentTickRate={currentTickRate}
