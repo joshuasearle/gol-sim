@@ -9,7 +9,6 @@ interface BodyProps {
 
 const Body: React.FC<BodyProps> = ({ board }) => {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-  console.log(windowWidth);
 
   useEffect(() => {
     const windowResizeHandler = () => {
