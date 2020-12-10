@@ -4,6 +4,12 @@ html {
   margin: 0;
 }
 
+:root {
+  --primary-color: #00404b;
+  --secondary-color: #87c2cc;
+  --tertiary-color: #001418;
+}
+
 *,
 *:before,
 *:after {
@@ -16,7 +22,7 @@ html {
 .header {
   text-align: center;
   padding: 0 5em;
-  background-color: #a23e48;
+  background-color: var(--primary-color);
   color: white;
 }
 
@@ -40,5 +46,25 @@ html {
 
 .board {
   border: none;
+}
+
+.footer {
+  color: white;
+  text-align: center;
+  background-color: var(--primary-color);
+  display: flex;
+  justify-content: center;
+  align-self: center;
+  align-items: center;
+  padding-top: 4px;
+  padding-bottom: 3px;
+}
+
+.footer p {
+  margin: 0 0.5em;
+}
+
+.footer img {
+  margin: 0 0.5em;
 }
 
