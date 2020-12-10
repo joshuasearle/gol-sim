@@ -9,5 +9,5 @@ export const initialSpawnChance = 50;
 export const boardWidth = 100;
 export const boardHeight = 43;
 
-export const aliveColor = 'white';
-export const deadColor = 'black';
+export const aliveColor = '#87c2cc';
+export const deadColor = '#001418';
