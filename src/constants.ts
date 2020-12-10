@@ -7,7 +7,7 @@ export const initialTickRate = (maxTickRate + minTickRate) / 2;
 export const initialSpawnChance = 50;
 
 export const boardWidth = 100;
-export const boardHeight = 50;
+export const boardHeight = 43;
 
 export const aliveColor = 'white';
 export const deadColor = 'black';
