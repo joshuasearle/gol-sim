@@ -4,6 +4,7 @@ import TickRateSlider from '../tickRateSlider/TickRateSlider';
 import StartStopButton from '../startStopButton/StartStopButton';
 import RandomiseButton from '../randomiseButton/RandomiseButton';
 import SpawnChanceSlider from '../spawnChanceSlider/SpawnChanceSlider';
+import ResetButton from '../resetButton/ResetButton';
 
 import classes from '../../css/classes';
 
@@ -22,6 +23,7 @@ interface HeaderProps {
   currentSpawnChance: number;
   // TODO: Fix type
   spawnChanceChangeHandler: any;
+  resetHandler: any;
 }
 
 const Header: React.FC<HeaderProps> = ({
@@ -35,6 +37,7 @@ const Header: React.FC<HeaderProps> = ({
   randomiseClickHandler,
   currentSpawnChance,
   spawnChanceChangeHandler,
+  resetHandler,
 }) => {
   const tickSlider = (
     <div>
@@ -73,6 +76,12 @@ const Header: React.FC<HeaderProps> = ({
     </div>
   );
 
+  const resetButton = (
+    <div>
+      <ResetButton running={running} resetHandler={resetHandler} />
+    </div>
+  );
+
   return (
     <header className={classes.header}>
       <h1>{title}</h1>
@@ -81,6 +90,7 @@ const Header: React.FC<HeaderProps> = ({
         {startStopButton}
         {spawnRateSlider}
         {randomiseButton}
+        {resetButton}
       </div>
     </header>
   );
