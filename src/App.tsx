@@ -19,7 +19,19 @@ const createEmpty2dArray = (width: number, height: number) => {
   for (let i = 0; i < height; i++) {
     let subArr = [];
     for (let j = 0; j < width; j++) {
-      subArr.push(Math.random() > 0.5);
+      subArr.push(false);
+    }
+    arr.push(subArr);
+  }
+  return arr;
+};
+
+const createRandom2dArray = (width: number, height: number, chance: number) => {
+  let arr = [];
+  for (let i = 0; i < height; i++) {
+    let subArr = [];
+    for (let j = 0; j < width; j++) {
+      subArr.push(Math.random() < chance);
     }
     arr.push(subArr);
   }
@@ -85,13 +97,19 @@ const App: React.FC = () => {
   };
 
   const randomiseClickHandler = () => {
-    console.log('randomise board');
+    setBoard(
+      createRandom2dArray(boardWidth, boardHeight, currentSpawnChance / 100)
+    );
   };
 
   // TODO: Fix type
   const spawnChanceChangeHandler = (event: any) => {
     console.log(event.target.value);
     setCurrentSpawnChance(event.target.value);
+  };
+
+  const resetHandler = () => {
+    setBoard(createEmpty2dArray(boardWidth, boardHeight));
   };
 
   return (
@@ -107,6 +125,7 @@ const App: React.FC = () => {
         randomiseClickHandler={randomiseClickHandler}
         currentSpawnChance={currentSpawnChance}
         spawnChanceChangeHandler={spawnChanceChangeHandler}
+        resetHandler={resetHandler}
       />
       <Body board={board} />
       <Footer />
