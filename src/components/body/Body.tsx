@@ -5,9 +5,10 @@ import Cell from '../cell/Cell';
 
 interface BodyProps {
   board: boolean[][];
+  cellClickHandler: any;
 }
 
-const Body: React.FC<BodyProps> = ({ board }) => {
+const Body: React.FC<BodyProps> = ({ board, cellClickHandler }) => {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
   useEffect(() => {
@@ -24,10 +25,14 @@ const Body: React.FC<BodyProps> = ({ board }) => {
 
   return (
     <table className={classes.board} cellSpacing='0' cellPadding='0'>
-      {board.map(row => (
+      {board.map((row, i) => (
         <tr>
-          {row.map(cell => (
-            <Cell alive={cell} cellWidth={cellWidth} />
+          {row.map((cell, j) => (
+            <Cell
+              onClick={() => cellClickHandler(i, j)}
+              alive={cell}
+              cellWidth={cellWidth}
+            />
           ))}
         </tr>
       ))}
