@@ -3,4 +3,5 @@ export default {
   headerOptions: 'header-options',
   cell: 'cell',
   board: 'board',
+  footer: 'footer',
 };
