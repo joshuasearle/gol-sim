@@ -12,11 +12,12 @@ module.exports = {
     rules: [
       { test: /\.tsx?$/, loader: 'ts-loader' },
       { test: /\.css$/, use: [MiniCssExtractPlugin.loader, 'css-loader'] },
+      { test: /\.(png|svg|jpg|jpeg|gif)$/i, type: 'asset/resource' },
     ],
   },
   plugins: [
     new HtmlWebpackPlugin({ template: './src/index.html' }),
     new MiniCssExtractPlugin(),
   ],
-  resolve: { extensions: ['.js', '.jsx', '.ts', '.tsx'] },
+  resolve: { extensions: ['.js', '.jsx', '.ts', '.tsx', '.png'] },
 };
