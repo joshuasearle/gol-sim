@@ -112,6 +112,13 @@ const App: React.FC = () => {
     setBoard(createEmpty2dArray(boardWidth, boardHeight));
   };
 
+  const cellClickHandler = (i: number, j: number) => {
+    if (running) return;
+    const boardCopy = [...board];
+    boardCopy[i][j] = !boardCopy[i][j];
+    setBoard(boardCopy);
+  };
+
   return (
     <>
       <Header
@@ -127,7 +134,7 @@ const App: React.FC = () => {
         spawnChanceChangeHandler={spawnChanceChangeHandler}
         resetHandler={resetHandler}
       />
-      <Body board={board} />
+      <Body board={board} cellClickHandler={cellClickHandler} />
       <Footer />
     </>
   );
