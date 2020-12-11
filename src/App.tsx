@@ -121,15 +121,16 @@ const App: React.FC = () => {
   };
 
   useEffect(() => {
-    const mouseDownHandler = (e: any) => {
-      e.preventDefault();
+    const mouseDownHandler = (e: MouseEvent) => {
+      const header = document.querySelector('.header');
+      const rect = header.getBoundingClientRect();
+      const mouseInHeader = rect.bottom >= e.clientY;
+      if (!mouseInHeader) e.preventDefault();
       setMouseDown(true);
-      console.log('true');
     };
-    const mouseUpHandler = (e: any) => {
+    const mouseUpHandler = (e: MouseEvent) => {
       e.preventDefault();
       setMouseDown(false);
-      console.log('false');
     };
     window.addEventListener('mousedown', mouseDownHandler);
     window.addEventListener('mouseup', mouseUpHandler);
