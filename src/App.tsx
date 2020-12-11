@@ -73,6 +73,7 @@ const App: React.FC = () => {
   const [currentSpawnChance, setCurrentSpawnChance] = useState(
     initialSpawnChance
   );
+  const [mouseDown, setMouseDown] = useState(false);
 
   useEffect(() => {
     if (running) {
@@ -117,6 +118,23 @@ const App: React.FC = () => {
     boardCopy[i][j] = !boardCopy[i][j];
     setBoard(boardCopy);
   };
+
+  useEffect(() => {
+    const mouseDownHandler = () => {
+      setMouseDown(true);
+      console.log('true');
+    };
+    const mouseUpHandler = () => {
+      setMouseDown(false);
+      console.log('false');
+    };
+    window.addEventListener('mousedown', mouseDownHandler);
+    window.addEventListener('mouseup', mouseUpHandler);
+    return () => {
+      window.removeEventListener('mousedown', mouseDownHandler);
+      window.removeEventListener('mouseup', mouseUpHandler);
+    };
+  });
 
   return (
     <>
