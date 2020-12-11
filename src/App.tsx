@@ -121,11 +121,13 @@ const App: React.FC = () => {
   };
 
   useEffect(() => {
-    const mouseDownHandler = () => {
+    const mouseDownHandler = (e: any) => {
+      e.preventDefault();
       setMouseDown(true);
       console.log('true');
     };
-    const mouseUpHandler = () => {
+    const mouseUpHandler = (e: any) => {
+      e.preventDefault();
       setMouseDown(false);
       console.log('false');
     };
