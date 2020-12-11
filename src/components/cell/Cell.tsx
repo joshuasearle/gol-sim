@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { deadColor, aliveColor } from '../../constants';
+import classes from '../../css/classes';
 
 interface CellProps {
   alive: boolean;
@@ -12,10 +12,10 @@ interface CellProps {
 const Cell: React.FC<CellProps> = ({ alive, cellWidth, onOver, onClick }) => {
   return (
     <td
+      className={alive ? classes.alive : classes.dead}
       onMouseOver={onOver}
-      onClick={onClick}
+      onMouseDown={onClick}
       style={{
-        backgroundColor: alive ? aliveColor : deadColor,
         height: cellWidth,
         width: cellWidth,
       }}
