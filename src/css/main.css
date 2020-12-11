@@ -5,9 +5,9 @@ html {
 }
 
 :root {
-  --primary-color: #00404b;
-  --secondary-color: #87c2cc;
-  --tertiary-color: #001418;
+  --primary-color: #4e002b;
+  --secondary-color: #9b4b77;
+  --tertiary-color: #16050e;
 }
 
 *,
@@ -67,4 +67,12 @@ html {
 .footer img {
   margin-top: 4px;
   margin: 0 0.5em;
+}
+
+.dead {
+  background-color: var(--tertiary-color);
+}
+
+.alive {
+  background-color: var(--secondary-color);
 }
