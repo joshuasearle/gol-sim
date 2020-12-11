@@ -5,13 +5,15 @@ import { deadColor, aliveColor } from '../../constants';
 interface CellProps {
   alive: boolean;
   cellWidth: number;
+  onOver: any;
   onClick: any;
 }
 
-const Cell: React.FC<CellProps> = ({ alive, cellWidth, onClick }) => {
+const Cell: React.FC<CellProps> = ({ alive, cellWidth, onOver, onClick }) => {
   return (
     <td
-      onMouseOver={onClick}
+      onMouseOver={onOver}
+      onClick={onClick}
       style={{
         backgroundColor: alive ? aliveColor : deadColor,
         height: cellWidth,
