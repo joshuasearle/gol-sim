@@ -5,10 +5,15 @@ import Cell from '../cell/Cell';
 
 interface BodyProps {
   board: boolean[][];
-  cellClickHandler: any;
+  cellMouseOverHandler: any;
+  cellMouseClickHandler: any;
 }
 
-const Body: React.FC<BodyProps> = ({ board, cellClickHandler }) => {
+const Body: React.FC<BodyProps> = ({
+  board,
+  cellMouseOverHandler,
+  cellMouseClickHandler,
+}) => {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
   useEffect(() => {
@@ -29,7 +34,8 @@ const Body: React.FC<BodyProps> = ({ board, cellClickHandler }) => {
         <tr>
           {row.map((cell, j) => (
             <Cell
-              onClick={() => cellClickHandler(i, j)}
+              onClick={() => cellMouseClickHandler(i, j)}
+              onOver={() => cellMouseOverHandler(i, j)}
               alive={cell}
               cellWidth={cellWidth}
             />
