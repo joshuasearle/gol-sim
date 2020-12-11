@@ -114,6 +114,7 @@ const App: React.FC = () => {
 
   const cellClickHandler = (i: number, j: number) => {
     if (running) return;
+    if (!mouseDown) return;
     const boardCopy = [...board];
     boardCopy[i][j] = !boardCopy[i][j];
     setBoard(boardCopy);
