@@ -11,7 +11,7 @@ interface CellProps {
 const Cell: React.FC<CellProps> = ({ alive, cellWidth, onClick }) => {
   return (
     <td
-      onMouseDown={onClick}
+      onMouseOver={onClick}
       style={{
         backgroundColor: alive ? aliveColor : deadColor,
         height: cellWidth,
