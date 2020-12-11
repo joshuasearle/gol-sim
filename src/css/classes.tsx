@@ -4,4 +4,6 @@ export default {
   cell: 'cell',
   board: 'board',
   footer: 'footer',
+  dead: 'dead',
+  alive: 'alive',
 };
