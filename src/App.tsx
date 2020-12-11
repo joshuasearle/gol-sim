@@ -112,13 +112,22 @@ const App: React.FC = () => {
     setBoard(createEmpty2dArray(boardWidth, boardHeight));
   };
 
-  const cellClickHandler = (i: number, j: number) => {
+  const cellMouseOverHandler = (i: number, j: number) => {
     if (running) return;
     if (!mouseDown) return;
     const boardCopy = [...board];
     boardCopy[i][j] = !boardCopy[i][j];
     setBoard(boardCopy);
   };
+
+  const cellMouseClickHandler = (i: number, j: number) => {
+    if (running) return;
+    const boardCopy = [...board];
+    boardCopy[i][j] = !boardCopy[i][j];
+    setBoard(boardCopy);
+  };
+
+  cellMouseClickHandler;
 
   useEffect(() => {
     const mouseDownHandler = (e: MouseEvent) => {
@@ -155,7 +164,11 @@ const App: React.FC = () => {
         spawnChanceChangeHandler={spawnChanceChangeHandler}
         resetHandler={resetHandler}
       />
-      <Body board={board} cellClickHandler={cellClickHandler} />
+      <Body
+        board={board}
+        cellMouseOverHandler={cellMouseOverHandler}
+        cellMouseClickHandler={cellMouseClickHandler}
+      />
       <Footer />
     </>
   );
