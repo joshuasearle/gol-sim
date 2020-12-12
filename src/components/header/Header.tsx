@@ -9,7 +9,6 @@ import ResetButton from '../resetButton/ResetButton';
 import classes from '../../css/classes';
 
 interface HeaderProps {
-  title: string;
   minTickRate: number;
   maxTickRate: number;
   currentTickRate: number;
@@ -24,10 +23,11 @@ interface HeaderProps {
   // TODO: Fix type
   spawnChanceChangeHandler: any;
   resetHandler: any;
+  oClickHandler: any;
+  tClickHandler: any;
 }
 
 const Header: React.FC<HeaderProps> = ({
-  title,
   minTickRate,
   maxTickRate,
   currentTickRate,
@@ -38,6 +38,8 @@ const Header: React.FC<HeaderProps> = ({
   currentSpawnChance,
   spawnChanceChangeHandler,
   resetHandler,
+  oClickHandler,
+  tClickHandler,
 }) => {
   const tickSlider = (
     <div>
@@ -84,7 +86,16 @@ const Header: React.FC<HeaderProps> = ({
 
   return (
     <header className={classes.header}>
-      <h1>{title}</h1>
+      <h1>
+        Game of Life Simual
+        <p style={{ display: 'inline' }} onClick={tClickHandler}>
+          t
+        </p>
+        <p style={{ display: 'inline' }} onClick={oClickHandler}>
+          o
+        </p>
+        r
+      </h1>
       <div className={classes.headerOptions}>
         {tickSlider}
         {startStopButton}
