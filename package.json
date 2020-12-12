@@ -7,7 +7,7 @@
   "scripts": {
     "start": "webpack-cli serve",
     "build": "webpack",
-    "pre-deploy": "npm run build",
+    "predeploy": "npm run build",
     "deploy": "gh-pages -d dist"
   },
   "keywords": [],
