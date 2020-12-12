@@ -5,9 +5,10 @@ html {
 }
 
 :root {
-  --primary-color: #00404b;
-  --secondary-color: #87c2cc;
-  --tertiary-color: #001418;
+  --primary-color: #4e002b;
+  --secondary-color: #9b4b77;
+  --tertiary-color: #16050e;
+  --animation-time: 0.2s;
 }
 
 *,
@@ -46,6 +47,7 @@ html {
 
 .board {
   border: none;
+  background-color: var(--tertiary-color);
 }
 
 .footer {
@@ -67,5 +69,37 @@ html {
 .footer img {
   margin-top: 4px;
   margin: 0 0.5em;
+}
+
+.dead {
+  animation-name: destroy;
+  animation-duration: var(--animation-time);
+  background-color: var(--tertiary-color);
+}
+
+.alive {
+  animation-name: create;
+  animation-duration: var(--animation-time);
+  background-color: var(--secondary-color);
+}
+
+@keyframes create {
+  0% {
+    background-color: var(--tertiary-color);
+  }
+
+  100% {
+    background-color: var(--secondary-color);
+  }
+}
+
+@keyframes destroy {
+  from {
+    background-color: var(--secondary-color);
+  }
+
+  to {
+    background-color: var(--tertiary-color);
+  }
 }
 
