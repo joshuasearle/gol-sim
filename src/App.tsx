@@ -3,6 +3,10 @@ import Header from './components/header/Header';
 import Body from './components/body/Body';
 import Footer from './components/footer/Footer';
 
+import createEmpty2dArray from './boardCreators/createEmpty';
+import createRandom2dArray from './boardCreators/createRandom';
+import nextBoard from './golLogic/golLogic';
+
 import {
   title,
   minTickRate,
@@ -13,60 +17,12 @@ import {
   boardHeight,
 } from './constants';
 
-const createEmpty2dArray = (width: number, height: number) => {
-  let arr = [];
-  for (let i = 0; i < height; i++) {
-    let subArr = [];
-    for (let j = 0; j < width; j++) {
-      subArr.push(false);
-    }
-    arr.push(subArr);
-  }
-  return arr;
-};
-
-const createRandom2dArray = (width: number, height: number, chance: number) => {
-  let arr = [];
-  for (let i = 0; i < height; i++) {
-    let subArr = [];
-    for (let j = 0; j < width; j++) {
-      subArr.push(Math.random() < chance);
-    }
-    arr.push(subArr);
-  }
-  return arr;
-};
-
-const neighbourCount = (board: boolean[][], x: number, y: number) => {
-  let neighbours = 0;
-  for (let i = -1; i <= 1; i++) {
-    for (let j = -1; j <= 1; j++) {
-      if (i === 0 && j == 0) continue;
-      try {
-        neighbours += !!board[x + i][y + j] ? 1 : 0;
-      } catch (e) {
-        continue;
-      }
-    }
-  }
-  return neighbours;
-};
-
-const nextBoard = (board: boolean[][]): boolean[][] => {
-  return board.map((row, x) => {
-    return row.map((alive, y) => {
-      const neibours = neighbourCount(board, x, y);
-      if (alive && (neibours === 2 || neibours === 3)) return true;
-      if (!alive && neibours === 3) return true;
-      return false;
-    });
-  });
-};
-
 const App: React.FC = () => {
   const [board, setBoard] = useState(
     createEmpty2dArray(boardWidth, boardHeight)
   );
+  console.log(board);
+
   const [currentTickRate, setCurrentTickRate] = useState(initialTickRate);
   // Initially, the simulation is not running
   const [running, setRunning] = useState(false);
