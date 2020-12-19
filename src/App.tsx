@@ -3,9 +3,6 @@ import Header from './components/header/Header';
 import Body from './components/body/Body';
 import Footer from './components/footer/Footer';
 
-import createEmpty2dArray from './boardCreators/createEmpty';
-import createRandom2dArray from './boardCreators/createRandom';
-import nextBoard from './golLogic/golLogic';
 import useMouseDown from './hooks/useMouseDownBody';
 import useToggle from './hooks/useToggle';
 import useBoard from './hooks/useBoard';
