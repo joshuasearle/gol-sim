@@ -17,7 +17,6 @@ const Body: React.FC<BodyProps> = ({
 }) => {
   const windowWidth = useWindow();
   const cellWidth = windowWidth / board[0].length;
-  console.log(board[0].length);
 
   return (
     <table className={classes.board} cellSpacing='0' cellPadding='0'>
