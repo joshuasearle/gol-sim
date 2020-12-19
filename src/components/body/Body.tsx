@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import classes from '../../css/classes';
 
 import Cell from '../cell/Cell';
+import useWindow from '../../hooks/useWindow';
 
 interface BodyProps {
   board: boolean[][];
@@ -14,18 +15,7 @@ const Body: React.FC<BodyProps> = ({
   cellMouseOverHandler,
   cellMouseClickHandler,
 }) => {
-  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-
-  useEffect(() => {
-    const windowResizeHandler = () => {
-      setWindowWidth(window.innerWidth);
-    };
-    window.addEventListener('resize', windowResizeHandler);
-    return () => {
-      window.removeEventListener('resize', windowResizeHandler);
-    };
-  });
-
+  const windowWidth = useWindow();
   const cellWidth = windowWidth / board[0].length;
 
   return (
