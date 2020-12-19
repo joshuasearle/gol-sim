@@ -8,6 +8,7 @@ import createRandom2dArray from './boardCreators/createRandom';
 import nextBoard from './golLogic/golLogic';
 import useMouseDown from './hooks/useMouseDownBody';
 import useToggle from './hooks/useToggle';
+import useBoard from './hooks/useBoard';
 
 import gliderGun from './easter-eggs/glider-gun';
 import pulsar from './easter-eggs/pulsar';
@@ -22,15 +23,16 @@ import {
 } from './constants';
 
 const App: React.FC = () => {
-  const [board, setBoard] = useState(
-    createEmpty2dArray(boardWidth, boardHeight)
-  );
-
   const [currentTickRate, setCurrentTickRate] = useState(initialTickRate);
   // Initially, the simulation is not running
   const [running, toggleRunning] = useToggle(false);
   const [currentSpawnChance, setCurrentSpawnChance] = useState(
     initialSpawnChance
+  );
+  const [board, resetBoard, randomiseBoard, setNextBoard, setBoard] = useBoard(
+    boardWidth,
+    boardHeight,
+    currentSpawnChance
   );
   const mouseDownBody = useMouseDown();
 
@@ -38,8 +40,7 @@ const App: React.FC = () => {
   useEffect(() => {
     if (running) {
       setTimeout(() => {
-        const next: boolean[][] = nextBoard(board);
-        setBoard(next);
+        setNextBoard();
       }, 600 / currentTickRate);
     }
   }, [running, board]);
@@ -49,19 +50,9 @@ const App: React.FC = () => {
     setCurrentTickRate(event.target.value);
   };
 
-  const randomiseClickHandler = () => {
-    setBoard(
-      createRandom2dArray(boardWidth, boardHeight, currentSpawnChance / 100)
-    );
-  };
-
   // TODO: Fix type
   const spawnChanceChangeHandler = (event: any) => {
     setCurrentSpawnChance(event.target.value);
-  };
-
-  const resetHandler = () => {
-    setBoard(createEmpty2dArray(boardWidth, boardHeight));
   };
 
   const cellMouseOverHandler = (i: number, j: number) => {
@@ -79,31 +70,21 @@ const App: React.FC = () => {
     setBoard(boardCopy);
   };
 
-  const oClickHandler = () => {
-    if (running) return;
-    setBoard(gliderGun);
-  };
-
-  const tClickHandler = () => {
-    if (running) return;
-    setBoard(pulsar);
-  };
-
   return (
     <>
       <Header
-        tClickHandler={tClickHandler}
-        oClickHandler={oClickHandler}
+        tClickHandler={() => setBoard(pulsar)}
+        oClickHandler={() => setBoard(gliderGun)}
         minTickRate={minTickRate}
         maxTickRate={maxTickRate}
         currentTickRate={currentTickRate}
         tickChangeHandler={tickChangeHandler}
         startStopClickHandler={toggleRunning}
         running={running}
-        randomiseClickHandler={randomiseClickHandler}
+        randomiseClickHandler={randomiseBoard}
         currentSpawnChance={currentSpawnChance}
         spawnChanceChangeHandler={spawnChanceChangeHandler}
-        resetHandler={resetHandler}
+        resetHandler={resetBoard}
       />
       <Body
         board={board}
