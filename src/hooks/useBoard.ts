@@ -12,7 +12,7 @@ const useBoard = (
   boolean[][],
   () => void,
   () => void,
-  () => void,
+  (_: boolean[][]) => void,
   (_: boolean[][]) => void
 ] => {
   const [board, setBoard] = useState(createEmpty2dArray(width, height));
@@ -23,8 +23,8 @@ const useBoard = (
   const reset = () => {
     setBoard(createEmpty2dArray(width, height));
   };
-  const setNext = () => {
-    setBoard(nextBoard(board));
+  const setNext = (currentBoard: boolean[][]) => {
+    setBoard(nextBoard(currentBoard));
   };
 
   return [board, reset, setRandom, setNext, setBoard];

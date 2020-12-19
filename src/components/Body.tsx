@@ -6,15 +6,10 @@ import useWindow from '../hooks/useWindow';
 
 interface BodyProps {
   board: boolean[][];
-  cellMouseOverHandler: any;
   cellMouseClickHandler: any;
 }
 
-const Body: React.FC<BodyProps> = ({
-  board,
-  cellMouseOverHandler,
-  cellMouseClickHandler,
-}) => {
+const Body: React.FC<BodyProps> = ({ board, cellMouseClickHandler }) => {
   const windowWidth = useWindow();
   const cellWidth = windowWidth / board[0].length;
 
@@ -24,8 +19,8 @@ const Body: React.FC<BodyProps> = ({
         <tr>
           {row.map((cell, j) => (
             <Cell
+              key={i * board[0].length + j}
               onClick={() => cellMouseClickHandler(i, j)}
-              onOver={() => cellMouseOverHandler(i, j)}
               alive={cell}
               cellWidth={cellWidth}
             />

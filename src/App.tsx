@@ -3,9 +3,8 @@ import Header from './components/Header';
 import Body from './components/Body';
 import Footer from './components/Footer';
 
-import useMouseDown from './hooks/useMouseDownBody';
 import useToggle from './hooks/useToggle';
-import useBoard from './hooks/useBoard';
+// import useBoard from './hooks/useBoard';
 
 import gliderGun from './easter-eggs/glider-gun';
 import pulsar from './easter-eggs/pulsar';
@@ -18,6 +17,9 @@ import {
   boardWidth,
   boardHeight,
 } from './constants';
+import createEmpty2dArray from './boardCreators/createEmpty';
+import nextBoard from './golLogic/golLogic';
+import createRandom2dArray from './boardCreators/createRandom';
 
 const App: React.FC = () => {
   const [currentTickRate, setCurrentTickRate] = useState(initialTickRate);
@@ -26,18 +28,15 @@ const App: React.FC = () => {
   const [currentSpawnChance, setCurrentSpawnChance] = useState(
     initialSpawnChance
   );
-  const [board, resetBoard, randomiseBoard, setNextBoard, setBoard] = useBoard(
-    boardWidth,
-    boardHeight,
-    currentSpawnChance
+  const [board, setBoard] = useState(
+    createEmpty2dArray(boardWidth, boardHeight)
   );
-  const mouseDownBody = useMouseDown();
 
   // Main game loop
   useEffect(() => {
     if (running) {
       setTimeout(() => {
-        setNextBoard();
+        setBoard(nextBoard(board));
       }, 600 / currentTickRate);
     }
   }, [running, board]);
@@ -52,16 +51,10 @@ const App: React.FC = () => {
     setCurrentSpawnChance(event.target.value);
   };
 
-  const cellMouseOverHandler = (i: number, j: number) => {
-    if (running) return;
-    if (!mouseDownBody) return;
-    const boardCopy = [...board];
-    boardCopy[i][j] = !boardCopy[i][j];
-    setBoard(boardCopy);
-  };
-
   const cellMouseClickHandler = (i: number, j: number) => {
     if (running) return;
+    console.log(i, j);
+
     const boardCopy = [...board];
     boardCopy[i][j] = !boardCopy[i][j];
     setBoard(boardCopy);
@@ -78,16 +71,14 @@ const App: React.FC = () => {
         tickChangeHandler={tickChangeHandler}
         startStopClickHandler={toggleRunning}
         running={running}
-        randomiseClickHandler={randomiseBoard}
+        randomiseClickHandler={setBoard(
+          createRandom2dArray(boardWidth, boardHeight, currentSpawnChance)
+        )}
         currentSpawnChance={currentSpawnChance}
         spawnChanceChangeHandler={spawnChanceChangeHandler}
-        resetHandler={resetBoard}
+        resetHandler={setBoard(createEmpty2dArray(boardHeight, boardWidth))}
       />
-      <Body
-        board={board}
-        cellMouseOverHandler={cellMouseOverHandler}
-        cellMouseClickHandler={cellMouseClickHandler}
-      />
+      <Body board={board} cellMouseClickHandler={cellMouseClickHandler} />
       <Footer />
     </>
   );

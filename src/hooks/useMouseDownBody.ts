@@ -10,9 +10,12 @@ const useMouseDownBody = () => {
       const rect = header.getBoundingClientRect();
       const mouseInHeader = rect.bottom >= e.clientY;
       if (!mouseInHeader) e.preventDefault();
+      console.log('down');
       setMouseDown(true);
     };
     const mouseUpHandler = (e: MouseEvent) => {
+      console.log('up');
+
       setMouseDown(false);
     };
     window.addEventListener('mousedown', mouseDownHandler);
