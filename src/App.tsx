@@ -7,6 +7,7 @@ import createEmpty2dArray from './boardCreators/createEmpty';
 import createRandom2dArray from './boardCreators/createRandom';
 import nextBoard from './golLogic/golLogic';
 import useMouseDown from './hooks/useMouseDownBody';
+import useToggle from './hooks/useToggle';
 
 import gliderGun from './easter-eggs/glider-gun';
 import pulsar from './easter-eggs/pulsar';
@@ -27,12 +28,13 @@ const App: React.FC = () => {
 
   const [currentTickRate, setCurrentTickRate] = useState(initialTickRate);
   // Initially, the simulation is not running
-  const [running, setRunning] = useState(false);
+  const [running, toggleRunning] = useToggle(false);
   const [currentSpawnChance, setCurrentSpawnChance] = useState(
     initialSpawnChance
   );
   const mouseDownBody = useMouseDown();
 
+  // Main game loop
   useEffect(() => {
     if (running) {
       setTimeout(() => {
@@ -45,11 +47,6 @@ const App: React.FC = () => {
   // TODO: Fix type
   const tickChangeHandler = (event: any) => {
     setCurrentTickRate(event.target.value);
-  };
-
-  const startStopClickHandler = () => {
-    // Toggle running
-    setRunning(!running);
   };
 
   const randomiseClickHandler = () => {
@@ -77,8 +74,6 @@ const App: React.FC = () => {
 
   const cellMouseClickHandler = (i: number, j: number) => {
     if (running) return;
-    console.log(i, j);
-
     const boardCopy = [...board];
     boardCopy[i][j] = !boardCopy[i][j];
     setBoard(boardCopy);
@@ -103,7 +98,7 @@ const App: React.FC = () => {
         maxTickRate={maxTickRate}
         currentTickRate={currentTickRate}
         tickChangeHandler={tickChangeHandler}
-        startStopClickHandler={startStopClickHandler}
+        startStopClickHandler={toggleRunning}
         running={running}
         randomiseClickHandler={randomiseClickHandler}
         currentSpawnChance={currentSpawnChance}
