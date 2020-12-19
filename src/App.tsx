@@ -73,8 +73,8 @@ const App: React.FC = () => {
   return (
     <>
       <Header
-        tClickHandler={() => setBoard(pulsar)}
-        oClickHandler={() => setBoard(gliderGun)}
+        tClickHandler={() => (!running ? setBoard(pulsar) : null)}
+        oClickHandler={() => (!running ? setBoard(gliderGun) : null)}
         minTickRate={minTickRate}
         maxTickRate={maxTickRate}
         currentTickRate={currentTickRate}
