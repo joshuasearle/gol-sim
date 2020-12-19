@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import classes from '../../css/classes';
+import classes from '../css/classes';
 
-import Cell from '../cell/Cell';
-import useWindow from '../../hooks/useWindow';
+import Cell from './Cell';
+import useWindow from '../hooks/useWindow';
 
 interface BodyProps {
   board: boolean[][];

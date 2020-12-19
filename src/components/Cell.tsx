@@ -1,6 +1,6 @@
 import React from 'react';
 
-import classes from '../../css/classes';
+import classes from '../css/classes';
 
 interface CellProps {
   alive: boolean;

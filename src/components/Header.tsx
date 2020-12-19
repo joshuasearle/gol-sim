@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 
-import TickRateSlider from '../tickRateSlider/TickRateSlider';
-import StartStopButton from '../startStopButton/StartStopButton';
-import RandomiseButton from '../randomiseButton/RandomiseButton';
-import SpawnChanceSlider from '../spawnChanceSlider/SpawnChanceSlider';
-import ResetButton from '../resetButton/ResetButton';
+import TickRateSlider from './TickRateSlider';
+import StartStopButton from './startStopButton';
+import RandomiseButton from './RandomiseButton';
+import SpawnChanceSlider from './SpawnChanceSlider';
+import ResetButton from './ResetButton';
 
-import classes from '../../css/classes';
+import classes from '../css/classes';
 
 interface HeaderProps {
   minTickRate: number;

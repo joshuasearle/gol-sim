@@ -1,6 +1,6 @@
 import React from 'react';
 import Logo from '../../assets/GitHub-Mark-Light-32px.png';
-import classes from '../../css/classes';
+import classes from '../css/classes';
 
 const Footer: React.FC = () => {
   return (
