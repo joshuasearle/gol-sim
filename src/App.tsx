@@ -6,6 +6,7 @@ import Footer from './components/footer/Footer';
 import createEmpty2dArray from './boardCreators/createEmpty';
 import createRandom2dArray from './boardCreators/createRandom';
 import nextBoard from './golLogic/golLogic';
+import useMouseDown from './hooks/useMouseDownBody';
 
 import gliderGun from './easter-eggs/glider-gun';
 import pulsar from './easter-eggs/pulsar';
@@ -30,7 +31,7 @@ const App: React.FC = () => {
   const [currentSpawnChance, setCurrentSpawnChance] = useState(
     initialSpawnChance
   );
-  const [mouseDown, setMouseDown] = useState(false);
+  const mouseDownBody = useMouseDown();
 
   useEffect(() => {
     if (running) {
@@ -68,7 +69,7 @@ const App: React.FC = () => {
 
   const cellMouseOverHandler = (i: number, j: number) => {
     if (running) return;
-    if (!mouseDown) return;
+    if (!mouseDownBody) return;
     const boardCopy = [...board];
     boardCopy[i][j] = !boardCopy[i][j];
     setBoard(boardCopy);
@@ -82,28 +83,6 @@ const App: React.FC = () => {
     boardCopy[i][j] = !boardCopy[i][j];
     setBoard(boardCopy);
   };
-
-  cellMouseClickHandler;
-
-  useEffect(() => {
-    const mouseDownHandler = (e: MouseEvent) => {
-      const header = document.querySelector('.header');
-      const rect = header.getBoundingClientRect();
-      const mouseInHeader = rect.bottom >= e.clientY;
-      if (!mouseInHeader) e.preventDefault();
-      setMouseDown(true);
-    };
-    const mouseUpHandler = (e: MouseEvent) => {
-      e.preventDefault();
-      setMouseDown(false);
-    };
-    window.addEventListener('mousedown', mouseDownHandler);
-    window.addEventListener('mouseup', mouseUpHandler);
-    return () => {
-      window.removeEventListener('mousedown', mouseDownHandler);
-      window.removeEventListener('mouseup', mouseUpHandler);
-    };
-  });
 
   const oClickHandler = () => {
     if (running) return;
